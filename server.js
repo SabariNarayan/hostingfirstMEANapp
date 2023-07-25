@@ -12,7 +12,7 @@ const port = 3000;
 // Initialize Express app
 const app = express();
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'dist', 'angapp02')));
+app.use(express.static('./dist/angapp02'));
 
 // Connect to MongoDB Atlas
 mongoose.connect('mongodb+srv://officialsabarinarayan:9447103050@cluster0.buyzcu4.mongodb.net/test', {
@@ -178,8 +178,9 @@ function authenticateToken(req, res, next) {
   
 }
 
-app.get('*', (req, res) => {
-  let filePath = path.join(__dirname, 'dist', 'angapp02', req.url);
+app.get('/*', function(req,res){
+  res.sendFile(path.join(__dirname + '/dist/angapp02/index.html'));
+
 
   // Check if the requested file is a JavaScript file
   if (filePath.endsWith('.js')) {

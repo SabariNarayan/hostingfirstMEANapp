@@ -6,11 +6,13 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+const mime = require('mime');
+const port = 3000;
 
 // Initialize Express app
 const app = express();
 app.use(cors());
-app.use(express.static('./dist/angapp02'));
+app.use(express.static(path.join(__dirname, 'dist', 'angapp02')));
 
 // Connect to MongoDB Atlas
 mongoose.connect('mongodb+srv://officialsabarinarayan:9447103050@cluster0.buyzcu4.mongodb.net/test', {
@@ -176,13 +178,22 @@ function authenticateToken(req, res, next) {
   
 }
 
+app.get('*', (req, res) => {
+  let filePath = path.join(__dirname, 'dist', 'angapp02', req.url);
+
+  // Check if the requested file is a JavaScript file
+  if (filePath.endsWith('.js')) {
+    // Set the Content-Type header for JavaScript files
+    res.setHeader('Content-Type', mime.getType('js'));
+  }
+
+  res.sendFile(filePath);
+});
 // Start the server
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
 
-app.get('/*', function(req,res){
-  res.sendFile(path.join(__dirname + '/dist/angapp02/index.html'));
-})
+
 
 

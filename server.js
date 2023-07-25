@@ -179,7 +179,7 @@ function authenticateToken(req, res, next) {
 }
 
 app.get('/*', function(req,res){
-  res.sendFile(path.join(__dirname + '/dist/angapp02/index.html'));
+  let filePath = path.join(__dirname, 'dist', 'angapp02', 'index.html');
 
 
   // Check if the requested file is a JavaScript file
@@ -194,6 +194,7 @@ app.get('/*', function(req,res){
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
+
 
 
 

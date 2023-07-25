@@ -182,7 +182,7 @@ app.listen(3000, () => {
 });
 
 app.get('/*', function(req,res){
-  res.sendFile(path.join(__dirname = '/dist/angapp02/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/angapp02/index.html'));
 })
 
 

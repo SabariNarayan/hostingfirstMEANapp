@@ -12,7 +12,7 @@ const port = 3000;
 // Initialize Express app
 const app = express();
 app.use(cors());
-app.use(express.static('./dist/angapp02'));
+app.use(express.static(path.join(__dirname+'/dist/angapp02')));
 
 // Connect to MongoDB Atlas
 mongoose.connect('mongodb+srv://officialsabarinarayan:9447103050@cluster0.buyzcu4.mongodb.net/test', {
